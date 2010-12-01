@@ -3,13 +3,22 @@ import unittest
 class Simulator:
 
     def __init__(self):
-        self.Step = 0
+        self.Count = 0
+
+    def Inc(self):
+        self.Count = self.Count + 1
 
 class SimulatorTests(unittest.TestCase):
 
+    def setUp(self):
+        self.sim = Simulator()
+
     def test_SimulatorInit(self):
-        sim = Simulator()
-        self.assertEqual(sim.Step, 0)
+        self.assertEqual(self.sim.Count, 0)
+
+    def test_IncIncreasesCount(self):
+        self.sim.Inc()
+        self.assertEqual(self.sim.Count, 1)
 
 def alltests():	
     return unittest.TestSuite([
