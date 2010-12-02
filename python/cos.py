@@ -7,7 +7,7 @@ class SimBase:
         self.InBuffers = inBuffers
 
     def tick(self):
-        return
+        raise NotImplementedError()
 
 class Simulator:
 
@@ -27,9 +27,8 @@ class SimBaseTests(unittest.TestCase):
         self.assertIs(simBase.InBuffers, inBuffers)
 
     def test_tick(self):
-        """Check that method is on SimBase."""
         simBase = SimBase([], [])
-        simBase.tick()
+        self.assertRaises(NotImplementedError, simBase.tick)
 
 class SimulatorTests(unittest.TestCase):
 
