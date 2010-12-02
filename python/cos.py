@@ -6,6 +6,9 @@ class SimBase:
         self.OutBuffers = outBuffers
         self.InBuffers = inBuffers
 
+    def tick(self):
+        return
+
 class Simulator:
 
     def __init__(self):
@@ -22,6 +25,11 @@ class SimBaseTests(unittest.TestCase):
         simBase = SimBase(outBuffers, inBuffers)
         self.assertIs(simBase.OutBuffers, outBuffers)
         self.assertIs(simBase.InBuffers, inBuffers)
+
+    def test_tick(self):
+        """Check that method is on SimBase."""
+        simBase = SimBase([], [])
+        simBase.tick()
 
 class SimulatorTests(unittest.TestCase):
 
