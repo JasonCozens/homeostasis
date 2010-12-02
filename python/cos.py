@@ -1,5 +1,11 @@
 import unittest
 
+class SimBase:
+
+    def __init__(self, outBuffers, inBuffers):
+        self.OutBuffers = outBuffers
+        self.InBuffers = inBuffers
+
 class Simulator:
 
     def __init__(self):
@@ -7,6 +13,15 @@ class Simulator:
 
     def Inc(self):
         self.Count = self.Count + 1
+
+class SimBaseTests(unittest.TestCase):
+
+    def test_InitSetsBuffers(self):
+        outBuffers = []
+        inBuffers = []
+        simBase = SimBase(outBuffers, inBuffers)
+        self.assertIs(simBase.OutBuffers, outBuffers)
+        self.assertIs(simBase.InBuffers, inBuffers)
 
 class SimulatorTests(unittest.TestCase):
 
@@ -22,6 +37,7 @@ class SimulatorTests(unittest.TestCase):
 
 def alltests():	
     return unittest.TestSuite([
+        unittest.TestLoader().loadTestsFromTestCase(SimBaseTests),
         unittest.TestLoader().loadTestsFromTestCase(SimulatorTests),
         ])
 
