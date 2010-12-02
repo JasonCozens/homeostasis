@@ -1,4 +1,4 @@
-import unittest
+
 
 class SimBase:
 
@@ -9,6 +9,7 @@ class SimBase:
     def tick(self):
         raise NotImplementedError()
 
+
 class Simulator:
 
     def __init__(self):
@@ -17,35 +18,4 @@ class Simulator:
     def Inc(self):
         self.Count = self.Count + 1
 
-class SimBaseTests(unittest.TestCase):
 
-    def test_InitSetsBuffers(self):
-        outBuffers = []
-        inBuffers = []
-        simBase = SimBase(outBuffers, inBuffers)
-        self.assertIs(simBase.OutBuffers, outBuffers)
-        self.assertIs(simBase.InBuffers, inBuffers)
-
-    def test_tick(self):
-        simBase = SimBase([], [])
-        self.assertRaises(NotImplementedError, simBase.tick)
-
-class SimulatorTests(unittest.TestCase):
-
-    def setUp(self):
-        self.sim = Simulator()
-
-    def test_SimulatorInit(self):
-        self.assertEqual(self.sim.Count, 0)
-
-    def test_IncIncreasesCount(self):
-        self.sim.Inc()
-        self.assertEqual(self.sim.Count, 1)
-
-def alltests():	
-    return unittest.TestSuite([
-        unittest.TestLoader().loadTestsFromTestCase(SimBaseTests),
-        unittest.TestLoader().loadTestsFromTestCase(SimulatorTests),
-        ])
-
-unittest.TextTestRunner(verbosity=2).run(alltests())
